@@ -27,6 +27,23 @@ export const loginWithToken = async (args: LoginRequest): Promise<LoginResultWit
   // API Spec은 강의 자료를 참고하세요.
   // access_token 발급에 성공한 경우에는 { result: 'success', access_token: string } 형태의 값을 반환하세요.
 
+  const res = await fetch(`${ BASE_URL }/auth/login`, {
+    method: 'POST',
+    headers:{
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(args)
+  })
+  
+  if(res.ok){
+    const data = await res.json()
+    const { access_token } = data
+    return {
+      result: 'success',
+      access_token
+    }
+  }
+  
   return {
     result: 'fail',
     access_token: null
@@ -39,6 +56,17 @@ export const getCurrentUserInfoWithToken = async (token: string): Promise<UserIn
   // argument로 전달받은 token을 Authorization header에 Bearer token으로 넣어주세요.
   // API Spec은 강의 자료를 참고하세요.
   // 유저 정보 조회에 성공한 경우에는 UserInfo 타입의 값을 반환하세요.
+  const res = await fetch(`${ BASE_URL }/profile`, {
+    method: 'GET',
+    headers:{
+      "Authorization": `Bearer ${token}`
+    }
+  })
+  
+  if(res.ok){
+    const data = await res.json()
+    return data.userInfo
+  }
 
   return null
 }

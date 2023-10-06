@@ -18,10 +18,15 @@ const JWTLogin = () => {
     // TODO: 로그인 연결 및 토큰 가져오기 (loginWithToken 함수 사용)
     // 로그인 실패시 함수를 종료합니다.
     // 로그인 성공시, getCurrentUserInfoWithToken 함수를 호출하여 userInfo를 가져옵니다.
-
+    const { access_token } = await loginWithToken(loginPayload)
+    if(!access_token) return;
+    
     // TODO: 유저 정보 가져오기 (getCurrentUserInfoWithToken 함수 사용)
     // 유저 정보 가져오기 실패시 함수를 종료합니다.
     // 유저 정보 가져오기 성공시, userInfo 상태를 업데이트합니다.
+    const userInfo = await getCurrentUserInfoWithToken(access_token)
+    if(!userInfo) return;
+    setUserInfo(userInfo)
   }
 
   return (<div>
