@@ -22,6 +22,8 @@ const Login = () => {
     })
 
     // TODO 3-1.: 로그인 실패시 함수 종료. 로그인 성공시 '/page-a'로 이동
+    if(loginResult === 'fail') return
+    routeTo('/page-a')
   }
 
   return (<div className="non-logged-in-body">

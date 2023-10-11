@@ -29,8 +29,12 @@ export const login = async (args: LoginRequest): Promise<LoginResult> => {
   // body에는 { username, password }가 들어가야 함
   // fetchClient를 사용하여 API 호출하거나, 직접 headers 작성
   // header가 올바르게 추가된 경우 쿠키는 자동으로 함께 전송됨
+  const res = await fetchClient(`${BASE_URL}/auth/login`,{
+    method: 'POST',
+    body: JSON.stringify(args)
+  })
 
-  return 'fail'
+  return res.ok ? 'success' : 'fail'
 }
 
 export const getCurrentUserInfo = async (): Promise<User | null> => {
