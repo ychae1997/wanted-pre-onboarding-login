@@ -32,7 +32,29 @@ const routerData: RouterElement[] = [
     label: '로그인',
     element: <Login />,
     withAuth: false,
+  },
+  {
+    id: 2,
+    path: '/page-a',
+    label: '페이지a',
+    element: <PageA />,
+    withAuth: true,
+  },
+  {
+    id: 3,
+    path: '/page-b',
+    label: '페이지b',
+    element: <PageB />,
+    withAuth: true,
+  },
+  {
+    id: 4,
+    path: '/page-c',
+    label: '페이지c',
+    element: <PageC />,
+    withAuth: true,
   }
+  
 ]
 
 // TODO 3-1: 인증이 필요한 페이지는 GeneralLayout으로 감싸서 라우터에 전달
@@ -55,4 +77,13 @@ export const routers: RemixRouter = createBrowserRouter(
 
 // TODO 3-2: 라우터 객체에서 인증이 필요한 페이지만 필터링해 사이드바에 전달
 // id, path, label을 전달하여 Sidebar에서 사용
-export const SidebarContent: SidebarElement[] = []
+export const SidebarContent: SidebarElement[] = 
+    routerData.filter((router:RouterElement) => {
+      if(router.withAuth){
+        return{
+          id: router.id,
+          path: router.path,
+          label: router.label
+        }
+      }
+  });
