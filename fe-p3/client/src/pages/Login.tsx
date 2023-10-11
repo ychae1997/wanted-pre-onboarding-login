@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { getCurrentUserInfo, login } from '../api/login'
 import { useRouter } from '../hooks/useRouter'
 
@@ -14,13 +14,6 @@ const Login = () => {
     // FormData를 이용해서 로그인 시도
     const formData = new FormData(event.currentTarget)
 
-    // TODO 3-2.: 이미 로그인된 상태라면 page-a로 라우팅
-    const userProfileRes = await getCurrentUserInfo()
-    if(userProfileRes !== null){
-      routeTo('/page-a')
-      return
-    }
-
     const loginResult = await login({
       username: formData.get('username') as string,
       password: formData.get('password') as string
@@ -30,6 +23,18 @@ const Login = () => {
     if(loginResult === 'fail') return
     routeTo('/page-a')
   }
+
+  // TODO 3-2.: 이미 로그인된 상태라면 page-a로 라우팅
+  const isLoggedIn = async() => {
+    const userProfileRes = await getCurrentUserInfo()
+    if(userProfileRes !== null){
+      routeTo('/page-a')
+      return
+    }
+  }
+  useEffect(() => {
+    isLoggedIn()
+  },[])
 
   return (<div className="non-logged-in-body">
     <h1>
