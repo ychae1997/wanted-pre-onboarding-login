@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent, userProfile }) => {
         .filter((element ) => {
           // TODO 4-1: element.isAdminOnly가 true일 때
           //  admin user(userProfile.userInfo.roles에 'admin'이 포함됨)에게만 메뉴 보여주기
-          return true
+          return element.isAdminOnly ? userProfile?.userInfo.roles.includes(AdminRole) : !!userProfile
         })
         .map((element) => {
         return (<li
