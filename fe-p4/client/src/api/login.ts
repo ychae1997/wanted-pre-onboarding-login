@@ -35,15 +35,36 @@ export const getCurrentUserInfo = async (): Promise<User | null> => {
 
 // TODO 4-2: GET, '/items' 호출
 export const getItems = async (): Promise<Item[] | null> => {
-  return null
+  const items = await fetch(`${ BASE_URL }/items`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      credentials: 'include'
+    }
+  })
+  return items.ok ? items.json() : null
 }
 
 // TODO 4-2: GET, '/all-items' 호출
 export const getAllItems = async (): Promise<Item[] | null> => {
-  return null
+  const allItems = await fetch(`${ BASE_URL }/all-items`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      credentials: 'include'
+    }
+  })
+  return allItems.ok ? allItems.json() : null
 }
 
 
 // TODO 4-2: POST, '/logout' 호출
 export const logout = async (): Promise<void> => {
+  const logout = await fetch(`${ BASE_URL }/logout`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      credentials: 'include'
+    }
+  })
 }
