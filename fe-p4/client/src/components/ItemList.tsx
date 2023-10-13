@@ -6,7 +6,7 @@ interface ItemListProps {
 }
 
 const ItemList: React.FC<ItemListProps> = ({items}) => {
-  return (<p>
+  return (<div>
       {items?.map((item) => {
         return <div key={item.id}>
           <h3>
@@ -15,7 +15,7 @@ const ItemList: React.FC<ItemListProps> = ({items}) => {
           <a target="_blank" href={item.content.body}>{item.content.body}</a>
         </div>
       })}
-    </p>)
+    </div>)
 }
 
 export default ItemList
