@@ -26,6 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ sidebarContent }) => {
 
   // TODO 4-2: 로그아웃 호출
   const logoutHandler = async () => {
+    logout().then(() => routeTo('/'))
   }
 
   return (<div className="sidebar">
