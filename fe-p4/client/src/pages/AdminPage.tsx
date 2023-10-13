@@ -6,9 +6,13 @@ import ItemList from '../components/ItemList'
 const AdminPage = () => {
   const [ items, setItems ] = useState<Item[] | null>(null)
   const isUserItemsFetched = useRef(false)
+  // fetch되면서 useEffect가 리렌더링 되는 현상(api재호출) 방지 위함
+  // react-query 사용을 통해 대체할 수 있음
 
   // TODO 4-2: getItems를 호출하여 userItem을 가져온 경우 상태 업데이트
   const fetchUserItems = useCallback(async () => {
+    const userItemsResponse = await getAllItems()
+    !!userItemsResponse && setItems(userItemsResponse)
 
     isUserItemsFetched.current = true
   }, [])

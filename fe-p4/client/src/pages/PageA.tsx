@@ -9,7 +9,9 @@ const PageA = () => {
 
   // TODO 4-2: getItems를 호출하여 userItem을 가져온 경우 상태 업데이트
   const fetchUserItems = useCallback(async () => {
-
+    const userItemsResponse = await getItems()
+    !!userItemsResponse && setItems(userItemsResponse)
+    
     isUserItemsFetched.current = true
   }, [])
 
